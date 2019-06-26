@@ -1,5 +1,9 @@
 import React from "react"
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import { LinkContainer as Link } from "react-router-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
+
+import "./scss/styles.scss"
 
 const VolunteerRegistration = () => {
     return (
@@ -21,13 +25,22 @@ const Login = () => {
 const App: React.FC = () => {
     return (
         <Router>
-            <header>
-                <h1>Miracle Messages</h1>
-                <nav>
-                    <NavLink to="/apply">Become a Volunteer</NavLink>
-                    <NavLink to="/login">Login</NavLink>
-                </nav>
-            </header>
+            <Navbar bg="light" expand="lg">
+                <Link to="/">
+                    <Navbar.Brand>Miracle Messsages</Navbar.Brand>
+                </Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Link to="/apply">
+                            <Nav.Link>Become a Volunteer</Nav.Link>
+                        </Link>
+                        <Link to="/login">
+                            <Nav.Link>Login</Nav.Link>
+                        </Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
             <Route exact path="/" component={VolunteerRegistration} />
             <Route path="/apply" component={VolunteerRegistration} />
             <Route path="/login" component={Login} />
