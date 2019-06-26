@@ -1,9 +1,11 @@
 import React from "react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { LinkContainer as Link } from "react-router-bootstrap"
 import { Navbar, Nav } from "react-bootstrap"
 
-import "./scss/styles.scss"
+import "../scss/styles.scss"
+
+import { ProtectedRoute } from "../routes"
 
 const VolunteerRegistration = () => {
     return (
@@ -41,9 +43,15 @@ const App: React.FC = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Route exact path="/" component={VolunteerRegistration} />
-            <Route path="/apply" component={VolunteerRegistration} />
-            <Route path="/login" component={Login} />
+            <Switch>
+                <ProtectedRoute
+                    exact
+                    path="/"
+                    component={VolunteerRegistration}
+                />
+                <Route path="/apply" component={VolunteerRegistration} />
+                <Route path="/login" component={Login} />
+            </Switch>
         </Router>
     )
 }
