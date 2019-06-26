@@ -1,17 +1,16 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { LinkContainer as Link } from "react-router-bootstrap"
-import { Navbar, Nav } from "react-bootstrap"
 
 import "../scss/styles.scss"
 
 import { ProtectedRoute } from "../routes"
+import AccountInfoForm from "./AccountInfoForm"
 
-const VolunteerRegistration = () => {
+const Home = () => {
     return (
         <>
-            <h2>Register</h2>
-            <p>Apply to be a volunteer</p>
+            <h2>Home</h2>
+            <p>Welcome</p>
         </>
     )
 }
@@ -27,29 +26,9 @@ const Login = () => {
 const App: React.FC = () => {
     return (
         <Router>
-            <Navbar bg="light" expand="lg">
-                <Link to="/">
-                    <Navbar.Brand>Miracle Messsages</Navbar.Brand>
-                </Link>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Link to="/apply">
-                            <Nav.Link>Become a Volunteer</Nav.Link>
-                        </Link>
-                        <Link to="/login">
-                            <Nav.Link>Login</Nav.Link>
-                        </Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
             <Switch>
-                <ProtectedRoute
-                    exact
-                    path="/"
-                    component={VolunteerRegistration}
-                />
-                <Route path="/apply" component={VolunteerRegistration} />
+                <ProtectedRoute exact path="/" component={Home} />
+                <Route path="/create-account" component={AccountInfoForm} />
                 <Route path="/login" component={Login} />
             </Switch>
         </Router>
