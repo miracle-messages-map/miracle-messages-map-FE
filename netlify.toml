@@ -1,0 +1,14 @@
+[build]
+    base = "."
+    publish = "./build"
+    command = "yarn build"
+
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+
+[[redirects]]
+    from = "/api/*"
+    to = "https://mmm-api.herokuapp.com/:splat"
+    status = 200
