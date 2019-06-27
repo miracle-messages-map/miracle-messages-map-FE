@@ -4,6 +4,8 @@ import { Form, Button } from "react-bootstrap"
 import { CardLayout } from "../Layout"
 import FormInput from "../shared/FormInput"
 
+import { login } from "../../api"
+
 const LoginPage = ({ history }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -11,9 +13,15 @@ const LoginPage = ({ history }) => {
     const handleSubmit = e => {
         e.preventDefault()
         // TODO: Validate form-fields
-        // TODO: Send login request
-        // TODO: Display server errors, if any
-        history.push("/dashboard")
+
+        login({ email, password })
+            .then(() => {
+                history.push("/dashboard")
+            })
+            .catch(({ message, statusCode }) => {
+                // TODO: Display server errors in a Toast, if any
+                alert(`${statusCode} Error\n${message}`)
+            })
     }
 
     return (
@@ -29,7 +37,7 @@ const LoginPage = ({ history }) => {
                     value={email}
                     onChange={setEmail}
                     labelText="Email Address"
-                    inputType="email"
+                    inputType="text"
                     isRequired={false}
                     placeholderText=""
                 />
