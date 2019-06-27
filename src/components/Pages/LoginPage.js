@@ -1,14 +1,20 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Form, Button } from "react-bootstrap"
 
 import { CardLayout } from "../Layout"
 import FormInput from "../shared/FormInput"
 
-import { login } from "../../api"
+import { login, verifyToken } from "../../api"
 
 const LoginPage = ({ history }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if (verifyToken()) {
+            history.push("/dashboard")
+        }
+    }, [history])
 
     const handleSubmit = e => {
         e.preventDefault()

@@ -15,7 +15,7 @@ const Layout = () => {
                             component={CreateAccountPage}
                         />
                         <Route path="/login" component={LoginPage} />
-                        <Redirect to="/create-account" />
+                        <Redirect to="/dashboard" />
                     </Switch>
                 </Row>
             </Container>
