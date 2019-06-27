@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom"
 
 import { verifyToken } from "../api"
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => {
+export const AuthorizedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}

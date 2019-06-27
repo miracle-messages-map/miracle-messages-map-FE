@@ -1,29 +1,26 @@
 import React, { useState } from "react"
 import { Form, Button } from "react-bootstrap"
-import { RouteComponentProps } from "react-router-dom"
 
-import SingleCardLayout from "./SingleCardLayout"
-import FormInput from "./FormInput"
+import { CardLayout } from "../Layout"
+import FormInput from "../shared/FormInput"
 
-interface AccountInfoFormProps extends RouteComponentProps {}
-
-const AccountInfoForm: React.FunctionComponent<AccountInfoFormProps> = ({
-    history
-}) => {
+const CreateAccountPage = ({ history }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = e => {
         e.preventDefault()
-        console.log(email, password, passwordConfirmation)
-        history.push("/")
+        // TODO: Validate form-fields
+        // TODO: Send create volunteer request
+        // TODO: Display server errors, if any
+        history.push("/login")
     }
 
     return (
-        <SingleCardLayout
+        <CardLayout
             greetingText="Create Your Account"
-            promptText="Let's create an account for you,"
+            promptText="Let's create an account for you."
             footerPrompt="Already have an account?"
             footerLink="/login"
             footerLinkText="Log In"
@@ -34,7 +31,7 @@ const AccountInfoForm: React.FunctionComponent<AccountInfoFormProps> = ({
                     onChange={setEmail}
                     labelText="Email Address"
                     inputType="email"
-                    isRequired={true}
+                    isRequired={false}
                     placeholderText=""
                 />
                 <FormInput
@@ -42,7 +39,7 @@ const AccountInfoForm: React.FunctionComponent<AccountInfoFormProps> = ({
                     onChange={setPassword}
                     labelText="Password"
                     inputType="password"
-                    isRequired={true}
+                    isRequired={false}
                     placeholderText=""
                 />
                 <FormInput
@@ -50,7 +47,7 @@ const AccountInfoForm: React.FunctionComponent<AccountInfoFormProps> = ({
                     onChange={setPasswordConfirmation}
                     labelText="Confirm Password"
                     inputType="password"
-                    isRequired={true}
+                    isRequired={false}
                     placeholderText=""
                 />
                 <Form.Group className="mb-0 text-center">
@@ -59,8 +56,8 @@ const AccountInfoForm: React.FunctionComponent<AccountInfoFormProps> = ({
                     </Button>
                 </Form.Group>
             </Form>
-        </SingleCardLayout>
+        </CardLayout>
     )
 }
 
-export default AccountInfoForm
+export default CreateAccountPage
