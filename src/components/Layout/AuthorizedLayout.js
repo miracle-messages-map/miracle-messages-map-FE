@@ -1,6 +1,7 @@
 import React from "react"
 import { Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { Switch, Redirect, Route } from "react-router-dom"
 
 import logo from "../../images/logo.png"
 
@@ -23,7 +24,7 @@ const DashboardNavbar = ({ history }) => {
                 <NavbarLogo />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse style={{ "justify-content": "flex-end" }}>
+            <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
                 <Nav className="">
                     <NavDropdown title="BarnBarn" className="float-right mb-0">
                         <NavDropdown.Item onClick={handleLogout}>
@@ -36,11 +37,19 @@ const DashboardNavbar = ({ history }) => {
     )
 }
 
-const AuthorizedLayout = ({ children, history }) => {
+const Dashboard = () => {
+    return <div>lsfjsldkf</div>
+}
+
+const AuthorizedLayout = ({ children, history, match }) => {
     return (
         <>
             <DashboardNavbar history={history} />
-            {children}
+            <Switch>
+                <Route path={match.path} component={Dashboard} />
+                {/* <Route path="/login" component={LoginPage} /> */}
+                <Redirect to={`${match.path}`} />
+            </Switch>
         </>
     )
 }
