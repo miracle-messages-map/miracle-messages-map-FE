@@ -43,8 +43,8 @@ const LoginPage = ({ history }) => {
                     value={email}
                     onChange={setEmail}
                     labelText="Email Address"
-                    inputType="text"
-                    isRequired={false}
+                    inputType="email"
+                    isRequired={true}
                     placeholderText=""
                 />
                 <FormInput
@@ -52,7 +52,7 @@ const LoginPage = ({ history }) => {
                     onChange={setPassword}
                     labelText="Password"
                     inputType="password"
-                    isRequired={false}
+                    isRequired={true}
                     placeholderText=""
                 />
                 <Form.Group className="mb-0 text-center">

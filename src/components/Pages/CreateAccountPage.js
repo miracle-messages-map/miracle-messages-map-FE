@@ -31,7 +31,7 @@ const CreateAccountPage = ({ history }) => {
                     onChange={setEmail}
                     labelText="Email Address"
                     inputType="email"
-                    isRequired={false}
+                    isRequired={true}
                     placeholderText=""
                 />
                 <FormInput
@@ -39,7 +39,7 @@ const CreateAccountPage = ({ history }) => {
                     onChange={setPassword}
                     labelText="Password"
                     inputType="password"
-                    isRequired={false}
+                    isRequired={true}
                     placeholderText=""
                 />
                 <FormInput
@@ -47,7 +47,7 @@ const CreateAccountPage = ({ history }) => {
                     onChange={setPasswordConfirmation}
                     labelText="Confirm Password"
                     inputType="password"
-                    isRequired={false}
+                    isRequired={true}
                     placeholderText=""
                 />
                 <Form.Group className="mb-0 text-center">
