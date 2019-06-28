@@ -53,3 +53,13 @@ export const addVolunteer = async ({
 export const getCoordinates = () => {
     return coordinateData
 }
+
+export const getVolunteers = async (page = 1) => {
+    try {
+        const { data } = await axios.get(`${baseUrl}/api/volunteers`)
+        return data
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
