@@ -1,11 +1,9 @@
 import axios from "axios"
-import { stringify } from "querystring"
 
 export const verifyToken = () => {
-    let token = ""
     try {
-        token = JSON.parse(localStorage.getItem("auth")).access_token
-        if (!token || token.length < 1) return false
+        const authData = JSON.parse(localStorage.getItem("auth"))
+        if (Object.keys(authData).length !== 4) return false
         return true
     } catch (error) {
         return false
