@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { Switch, Redirect, Route } from "react-router-dom"
@@ -14,6 +14,9 @@ const NavbarLogo = () => {
 }
 
 const DashboardNavbar = ({ history }) => {
+    const [fullName] = useState(
+        JSON.parse(localStorage.getItem("auth")).fullName
+    )
     const handleLogout = () => {
         localStorage.clear()
         history.push("/login")
@@ -26,7 +29,7 @@ const DashboardNavbar = ({ history }) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
                 <Nav className="">
-                    <NavDropdown title="BarnBarn" className="float-right mb-0">
+                    <NavDropdown title={fullName} className="float-right mb-0">
                         <NavDropdown.Item onClick={handleLogout}>
                             Logout
                         </NavDropdown.Item>
@@ -38,7 +41,7 @@ const DashboardNavbar = ({ history }) => {
 }
 
 const Dashboard = () => {
-    return <div>lsfjsldkf</div>
+    return <div>This is the dashboard!</div>
 }
 
 const AuthorizedLayout = ({ children, history, match }) => {
