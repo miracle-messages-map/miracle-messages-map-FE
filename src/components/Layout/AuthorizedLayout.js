@@ -5,6 +5,8 @@ import { Switch, Redirect, Route } from "react-router-dom"
 
 import logo from "../../images/logo.png"
 
+import Map from "../Map"
+
 const NavbarLogo = () => {
     return (
         <Link to="/dashboard" className="topnav-logo">
@@ -49,7 +51,7 @@ const AuthorizedLayout = ({ children, history, match }) => {
         <>
             <DashboardNavbar history={history} />
             <Switch>
-                <Route path={match.path} component={Dashboard} />
+                <Route path={match.path} component={Map} />
                 {/* <Route path="/login" component={LoginPage} /> */}
                 <Redirect to={`${match.path}`} />
             </Switch>
