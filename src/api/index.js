@@ -1,5 +1,7 @@
 import axios from "axios"
 
+const baseUrl = process.env.REACT_APP_API_URL || ""
+
 export const verifyToken = () => {
     try {
         const authData = JSON.parse(localStorage.getItem("auth"))
@@ -19,7 +21,7 @@ export const login = async ({ email, password }) => {
     const creds = { email, password }
 
     try {
-        const { data } = await axios.post("/api/login", creds)
+        const { data } = await axios.post(`${baseUrl}/api/login`, creds)
         localStorage.setItem("auth", JSON.stringify(data))
         return data
     } catch (err) {
