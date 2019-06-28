@@ -1,5 +1,7 @@
 import axios from "axios"
 
+import coordinateData from "./coordinate.json"
+
 const baseUrl = process.env.REACT_APP_API_URL || ""
 
 export const verifyToken = () => {
@@ -46,4 +48,8 @@ export const addVolunteer = async ({
         console.log(err)
         throw err
     }
+}
+
+export const getCoordinates = () => {
+    return coordinateData
 }
