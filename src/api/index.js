@@ -29,3 +29,21 @@ export const login = async ({ email, password }) => {
         throw error
     }
 }
+
+export const addVolunteer = async ({
+    firstName,
+    lastName,
+    email,
+    password
+}) => {
+    const creds = { firstName, lastName, email, password }
+
+    try {
+        const { data } = await axios.post(`${baseUrl}/api/volunteers`, creds)
+        localStorage.setItem("auth", JSON.stringify(data))
+        return data
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
+}

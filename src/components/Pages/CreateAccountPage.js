@@ -1,20 +1,32 @@
 import React, { useState } from "react"
 import { Form, Button } from "react-bootstrap"
 
+import { addVolunteer } from "../../api"
+
 import { CardLayout } from "../Layout"
 import FormInput from "../shared/FormInput"
 
 const CreateAccountPage = ({ history }) => {
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
     const handleSubmit = e => {
         e.preventDefault()
-        // TODO: Validate form-fields
-        // TODO: Send create volunteer request
-        // TODO: Display server errors, if any
-        history.push("/login")
+        // TODO: Validate form-fields, for real
+        if (password !== passwordConfirmation)
+            return alert(`Passwords must match!`)
+
+        addVolunteer({ firstName, lastName, email, password })
+            .then(() => {
+                history.push("/dashboard")
+            })
+            .catch(({ message, statusCode }) => {
+                // TODO: Display server errors in a Toast, if any
+                alert(`${statusCode} Error\n${message}`)
+            })
     }
 
     return (
@@ -26,6 +38,22 @@ const CreateAccountPage = ({ history }) => {
             footerLinkText="Log In"
         >
             <Form onSubmit={handleSubmit}>
+                <FormInput
+                    value={firstName}
+                    onChange={setFirstName}
+                    labelText="First Name"
+                    inputType="text"
+                    isRequired={true}
+                    placeholderText=""
+                />
+                <FormInput
+                    value={lastName}
+                    onChange={setLastName}
+                    labelText="Last Name"
+                    inputType="text"
+                    isRequired={true}
+                    placeholderText=""
+                />
                 <FormInput
                     value={email}
                     onChange={setEmail}
