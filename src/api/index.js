@@ -17,27 +17,15 @@ export const login = async ({ email, password }) => {
         message: "Incorrect email and/or password",
         statusCode: 401
     }
-    const auth = {
-        grant_type: "password",
-        username: email,
-        password: password
-    }
 
-    const headers = {
-        Authorization: `Basic ${btoa("mmm-client:mmm-secret")}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-    }
+    const creds = { email, password }
+
     try {
-        const { data } = await axios.post(
-            `https://mmm-api.herokuapp.com/oauth/token`,
-            stringify(auth),
-            {
-                headers
-            }
-        )
+        const { data } = await axios.post("/api/login", creds)
         localStorage.setItem("auth", JSON.stringify(data))
         return data
     } catch (err) {
+        console.log(err)
         throw error
     }
 }
