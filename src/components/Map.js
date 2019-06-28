@@ -25,6 +25,19 @@ getVolunteers(1)
 const MapInner = () => {
     const [selectedVolunteer, setSelectedVolunteer] = useState(null)
 
+    useEffect(() => {
+        const listener = e => {
+            if (e.key === "Escape") {
+                setSelectedVolunteer(null)
+            }
+        }
+        window.addEventListener("keydown", listener)
+
+        return () => {
+            window.removeEventListener("keydown", listener)
+        }
+    }, [])
+
     return (
         <GoogleMap
             defaultZoom={11}
@@ -42,7 +55,12 @@ const MapInner = () => {
             ))}
 
             {selectedVolunteer && volunteers.length > 0 && (
-                <InfoWindow position={coordinates[selectedVolunteer]}>
+                <InfoWindow
+                    onCloseClick={() => {
+                        setSelectedVolunteer(null)
+                    }}
+                    position={coordinates[selectedVolunteer]}
+                >
                     <>
                         <h3>{volunteers[selectedVolunteer].firstName}</h3>
                         <h4>{volunteers[selectedVolunteer].lastName}</h4>
