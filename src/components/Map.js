@@ -1,22 +1,54 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
     GoogleMap,
     withScriptjs,
     withGoogleMap,
-    Marker
+    Marker,
+    InfoWindow
 } from "react-google-maps"
 import uuid from "uuid/v4"
 
-import { getCoordinates } from "../api"
+import mapStyles from "./mapStyles"
+
+import { getCoordinates, getVolunteers } from "../api"
 
 const coordinates = getCoordinates()
+let volunteers = []
+
+getVolunteers(1)
+    .then(v => {
+        volunteers = v
+        console.log(volunteers)
+    })
+    .catch(err => alert(err))
 
 const MapInner = () => {
+    const [selectedVolunteer, setSelectedVolunteer] = useState(null)
+
     return (
-        <GoogleMap defaultZoom={11} defaultCenter={coordinates[0]}>
-            {coordinates.map(c => (
-                <Marker key={uuid()} position={c} />
+        <GoogleMap
+            defaultZoom={11}
+            defaultCenter={coordinates[0]}
+            defaultOptions={{ styles: mapStyles }}
+        >
+            {coordinates.map((c, i) => (
+                <Marker
+                    key={uuid()}
+                    position={c}
+                    onClick={() => {
+                        setSelectedVolunteer(i)
+                    }}
+                />
             ))}
+
+            {selectedVolunteer && volunteers.length > 0 && (
+                <InfoWindow position={coordinates[selectedVolunteer]}>
+                    <>
+                        <h3>{volunteers[selectedVolunteer].firstName}</h3>
+                        <h4>{volunteers[selectedVolunteer].lastName}</h4>
+                    </>
+                </InfoWindow>
+            )}
         </GoogleMap>
     )
 }
